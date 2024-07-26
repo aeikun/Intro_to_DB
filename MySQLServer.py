@@ -14,7 +14,7 @@ def create_database():
         if connection.is_connected():
             cursor = connection.cursor()
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;")
-            print("Database 'alx_book_store' created successfully!")
+            print("Database 'alx_book_store' created Successfully!")
             
     except Error as e:
         print(f"Error: {e}")

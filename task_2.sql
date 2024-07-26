@@ -1,41 +1,50 @@
--- Create the Authors table
-CREATE TABLE IF NOT EXISTS AUTHORS (
-    AUTHOR_ID INT AUTO_INCREMENT PRIMARY KEY,
-    AUTHOR_NAME VARCHAR(255) NOT NULL
-);
+USE alx_book_store;
 
--- Create the Books table
-CREATE TABLE IF NOT EXISTS BOOKS (
-    BOOK_ID INT AUTO_INCREMENT PRIMARY KEY,
-    TITLE VARCHAR(255) NOT NULL,
-    AUTHOR_ID INT,
-    PRICE DECIMAL(10, 2) NOT NULL,
-    PUBLICATION_DATE DATE,
-    FOREIGN KEY (AUTHOR_ID) REFERENCES AUTHORS(AUTHOR_ID)
-);
+-- Drop tables if they already exist
+DROP TABLE IF EXISTS Order_Details;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Books;
+DROP TABLE IF EXISTS Customers;
+DROP TABLE IF EXISTS Authors;
 
--- Create the Customers table
-CREATE TABLE IF NOT EXISTS CUSTOMERS (
-    CUSTOMER_ID INT AUTO_INCREMENT PRIMARY KEY,
-    CUSTOMER_NAME VARCHAR(255) NOT NULL,
-    EMAIL VARCHAR(255) NOT NULL,
-    ADDRESS TEXT
-);
+-- Create tables
+CREATE TABLE Authors (
+    author_id INT(11) NOT NULL AUTO_INCREMENT,
+    author_name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (author_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Create the Orders table
-CREATE TABLE IF NOT EXISTS ORDERS (
-    ORDER_ID INT AUTO_INCREMENT PRIMARY KEY,
-    CUSTOMER_ID INT,
-    ORDER_DATE DATE NOT NULL,
-    FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID)
-);
+CREATE TABLE Books (
+    book_id INT(11) NOT NULL AUTO_INCREMENT,
+    title VARCHAR(130) NOT NULL,
+    author_id INT(11) DEFAULT NULL,
+    price DOUBLE NOT NULL,
+    publication_date DATE DEFAULT NULL,
+    PRIMARY KEY (book_id),
+    KEY author_id (author_id),
+    CONSTRAINT Books_ibfk_1 FOREIGN KEY (author_id) REFERENCES Authors (author_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Create the Order_Details table
-CREATE TABLE IF NOT EXISTS ORDER_DETAILS (
-    ORDERDETAILID INT AUTO_INCREMENT PRIMARY KEY,
-    ORDER_ID INT,
-    BOOK_ID INT,
-    QUANTITY INT NOT NULL,
-    FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
-    FOREIGN KEY (BOOK_ID) REFERENCES BOOKS(BOOK_ID)
-);
+CREATE TABLE Customers (
+    customer_id INT(11) NOT NULL AUTO_INCREMENT,
+    customer_name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (customer_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE Orders (
+    order_id INT(11) NOT NULL AUTO_INCREMENT,
+    customer_id INT(11),
+    order_date DATE NOT NULL,
+    PRIMARY KEY (order_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers (customer_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE Order_Details (
+    order_detail_id INT(11) NOT NULL AUTO_INCREMENT,
+    order_id INT(11),
+    book_id INT(11),
+    quantity INT(11) NOT NULL,
+    PRIMARY KEY (order_detail_id),
+    FOREIGN KEY (order_id) REFERENCES Orders (order_id),
+    FOREIGN KEY (book_id) REFERENCES Books (book_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -45,7 +45,7 @@ CREATE TABLE Order_Details (
     order_detail_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     order_id INT(11),
     book_id INT(11),
-    quantity INT(11),
+    quantity DOUBLE,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (book_id) REFERENCES Books(book_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

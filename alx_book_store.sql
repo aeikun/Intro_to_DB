@@ -1,6 +1,15 @@
--- Create the database
-CREATE DATABASE IF NOT EXISTS alx_book_store;
+-- Make sure to include this line to drop the database if it exists.
+DROP DATABASE IF EXISTS alx_book_store;
+
+-- Create the database with the correct settings.
+CREATE DATABASE IF NOT EXISTS alx_book_store
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci;
+
+-- Select the database to use
 USE alx_book_store;
+
+-- Your existing SQL commands for creating tables and inserting data follow here.
 
 -- Create the Authors table
 CREATE TABLE IF NOT EXISTS Authors (

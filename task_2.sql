@@ -25,7 +25,7 @@ CREATE TABLE Books (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Create Customers table
-CREATE TABLE Customers (
+CREATE TABLE customer (
     customer_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     customer_name VARCHAR(215) NOT NULL,
     email VARCHAR(215) NOT NULL,

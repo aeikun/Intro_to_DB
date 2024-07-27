@@ -16,9 +16,9 @@ def create_database():
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;")
             print("Database 'alx_book_store' created successfully!")
 
-    except Error as e:
-        print(f"Error: {e}")
-
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+    
     finally:
         if connection and connection.is_connected():
             cursor.close()

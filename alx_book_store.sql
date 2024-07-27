@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS Books (
     FOREIGN KEY (author_id) REFERENCES Authors(author_id)
 );
 
-CREATE TABLE IF NOT EXISTS Customers (
+CREATE TABLE IF NOT EXISTS customer (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_name VARCHAR(215) NOT NULL,
     email VARCHAR(215) NOT NULL,
